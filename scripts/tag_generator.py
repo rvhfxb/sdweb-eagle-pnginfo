@@ -60,5 +60,10 @@ class TagGenerator():
                     _tag_data = ""
                 if _tag_data:
                     tags += [f"{_tag}: {_tag_data}"]
+            # additional model tag for sd-webui-additional-networks
+            if _tag == "AddNet":
+                for key in self.p.extra_generation_params.keys():
+                    if key.startswith("AddNet Model "):
+                        tags += ["AddNet: " + self.p.extra_generation_params[key][:-14]]
         tags = [ x for x in tags if x.strip() != "" ]
         return tags
